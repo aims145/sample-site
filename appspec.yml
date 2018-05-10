@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+
+files:
+  - source: sample-site
+    destination: /var/www/html
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_apache.sh
+	  runas: root
+
+  ApplicationStart:
+    - location: scripts/getpull.sh
+      timeout: 3600
+	  
+  AfterInstall:
+    - location: scripts/start_apache.sh
+      timeout: 180
+	  runas: root
+
+  ValidateService:
+    - location: scripts/status_apache.sh
+      timeout: 3600
+      runas: runas: root
