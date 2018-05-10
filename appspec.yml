@@ -8,18 +8,15 @@ files:
 hooks:
   BeforeInstall:
     - location: scripts/stop_apache.sh
-	  runas: root
-
+      runas: root
   ApplicationStart:
-    - location: scripts/getpull.sh
+    - location: scripts/getpull.sh"
       timeout: 3600
-	  
   AfterInstall:
     - location: scripts/start_apache.sh
       timeout: 180
-	  runas: root
-
+      runas: root
   ValidateService:
     - location: scripts/status_apache.sh
       timeout: 3600
-      runas: runas: root
+      runas: root
