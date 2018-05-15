@@ -10,7 +10,7 @@ hooks:
     - location: scripts/stop_apache.sh
       runas: root
   ApplicationStart:
-    - location: scripts/getpull.sh
+    - location: scripts/changepermission.sh
       timeout: 3600
   AfterInstall:
     - location: scripts/start_apache.sh
