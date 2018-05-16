@@ -6,6 +6,9 @@ files:
     destination: /var/www/html
     overwrite: yes
 
+remove:
+  - /var/www/html/*
+
 hooks:
   BeforeInstall:
     - location: scripts/stop_apache.sh
