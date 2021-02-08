@@ -7,17 +7,13 @@ files:
     overwrite: yes
 
 hooks:
-  BeforeInstall:
-    - location: scripts/stop_apache.sh
-      timeout: 3600
-      runas: root
-  ApplicationStart:
-    - location: scripts/changepermission.sh
-      timeout: 3600
   AfterInstall:
     - location: scripts/start_apache.sh
       timeout: 180
       runas: root
+  ApplicationStart:
+    - location: scripts/changepermission.sh
+      timeout: 3600    
   ValidateService:
     - location: scripts/status_apache.sh
       timeout: 3600
