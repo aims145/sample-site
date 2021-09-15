@@ -30,7 +30,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'push'
-        run: cd environments && cd sandbox && terraform plan -no-color
+        run: cd environments && cd sandbox && terraform init && terraform plan -no-color
         # env:
         #   TF_WORKSPACE: sandbox        
       # - name: Terraform Apply
