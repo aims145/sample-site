@@ -24,8 +24,8 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
-        env:
-          TF_WORKSPACE: sandbox        
+        # env:
+        #   TF_WORKSPACE: sandbox        
 
       - name: Terraform Plan
         id: plan
