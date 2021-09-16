@@ -31,7 +31,9 @@ jobs:
         id: plan
         if: github.event_name == 'push'
         run: cd modules && cd vpc && terraform init && terraform plan -no-color
-    steps:        
+    steps:   
+      - name: Checkout
+        uses: actions/checkout@v2           
       - name: Terraform plan for sandbox
         id: plan for sandbox
         if: github.event_name == 'push'
