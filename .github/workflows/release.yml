@@ -31,11 +31,11 @@ jobs:
         id: plan
         if: github.event_name == 'push'
         run: cd modules && cd vpc && terraform init && terraform plan -no-color
-      - name: Terraform plan for sandbox
-        id: plan for sandbox
-        if: github.event_name == 'push'
-        run: cd environments && cd sandbox && terraform init && terraform plan -no-color
-      - name: Terraform plan for prod
-        id: plan for prod
-        if: github.event_name == 'push'
-        run: cd environments && cd production && terraform init && terraform plan -no-color        
+      # - name: Terraform plan for sandbox
+      #   id: plan for sandbox
+      #   if: github.event_name == 'push'
+      #   run: cd environments && cd sandbox && terraform init && terraform plan -no-color
+      # - name: Terraform plan for prod
+      #   id: plan for prod
+      #   if: github.event_name == 'push'
+      #   run: cd environments && cd production && terraform init && terraform plan -no-color        
