@@ -29,4 +29,4 @@
 # #     zone2 = "10.0.31.0/24"
 # #   }
 # # }
-./environments/modules/variables.tf
+./production/environments/modules/variables.tf
