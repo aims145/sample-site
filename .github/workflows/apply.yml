@@ -30,7 +30,7 @@ jobs:
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: './modules/vpc'
           tf_actions_comment: true  
-      - name: 'Terraform plan'
+      - name: 'Terraform apply'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.13
