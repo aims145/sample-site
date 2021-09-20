@@ -1,4 +1,4 @@
-name: "Terraform-Plan-Infra-Plan"
+name: "Terraform-Plan"
 
 on:
   push:
@@ -7,8 +7,33 @@ on:
       - dev
 
 jobs:
-  terraform:
-    name: "Terraform"
+  terraform-module:
+    name: "Terraform-modules"
+    runs-on: ubuntu-latest
+    env:	
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
+      AWS_REGION: 'us-west-1'
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: './modules/vpc'
+          tf_actions_comment: true
+      - name: 'Terraform plan'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: './modules/vpc'
+          tf_actions_comment: true   
+  terraform-prod:
+    name: "Terraform-prod"
     runs-on: ubuntu-latest
     env:	
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
