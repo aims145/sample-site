@@ -99,5 +99,5 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: './environments/production'
+          tf_actions_working_dir: './environments/sandbox'
           tf_actions_comment: true           
