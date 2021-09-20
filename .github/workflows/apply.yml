@@ -5,7 +5,7 @@ on:
     types: [ closed ]
 
 jobs:
-  terraform:
+  terraform-module:
     name: "Terraform-modules"
     runs-on: ubuntu-latest
     env:	
