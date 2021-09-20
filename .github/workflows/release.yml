@@ -2,8 +2,7 @@ name: "Terraform-Plan"
 
 on:
   pull_request:
-    branches:
-      - dev
+    branches: [ master ]
 
 jobs:
   terraform-module:
