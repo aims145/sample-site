@@ -17,7 +17,7 @@ jobs:
       - shell: bash
         run: |
           source $BASH_ENV
-          deploy.sh -e << parameters.TERRAFORM_ENVIRONMENT >> -o plan    
+          deploy.sh     
     
     
       - name: 'Checkout'
