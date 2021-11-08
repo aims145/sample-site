@@ -14,6 +14,12 @@ jobs:
       AWS_REGION: 'us-east-2'
 
     steps:
+      - shell: bash
+        run: |
+          source $BASH_ENV
+          ./bin/deploy.sh -e << parameters.TERRAFORM_ENVIRONMENT >> -o plan    
+    
+    
       - name: 'Checkout'
         uses: actions/checkout@master
       - name: 'Terraform Init'
@@ -24,7 +30,8 @@ jobs:
           tf_actions_working_dir: './modules/vpc'
           tf_actions_comment: true
       - name: 'Terraform plan'
-        uses: hashicorp/terraform-github-actions@master
+        uses: hashicorp/terraform-github-actions@master        
+        
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
