@@ -16,8 +16,7 @@ jobs:
     steps:
       - shell: bash
         run: |
-          source $BASH_ENV
-          deploy.sh     
+          ./deploy.sh     
     
     
       - name: 'Checkout'
