@@ -16,8 +16,7 @@ jobs:
     steps:    
       - name: 'Checkout'
         uses: actions/checkout@master
-      - shell: bash
-        run: ./deploy.sh         
+        
         
         
         
