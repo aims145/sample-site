@@ -13,14 +13,14 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
       AWS_REGION: 'us-east-2'
 
-    steps:
-      - shell: bash
-        run: |
-          ./deploy.sh     
-    
-    
+    steps:    
       - name: 'Checkout'
         uses: actions/checkout@master
+      - shell: bash
+        run: ./deploy.sh         
+        
+        
+        
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
