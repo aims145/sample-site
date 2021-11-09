@@ -84,8 +84,11 @@ jobs:
           tf_actions_subcommand: 'plan'
           TERRAFORM_ENVIRONMENT: sandbox
           tf_actions_working_dir: './environments/sandbox'
-          tf_actions_comment: true         
+          tf_actions_comment: true       
+        env:
+          TF_CLI_ARGS_init: '-var="TERRAFORM_ENVIRONMENT=sandbox"'          
+          
       - name: run shell script
         run: |
           chmod +x ./deploy.sh
-          ./deploy.sh -a plan          
+          ./deploy.sh -e << parameters.TERRAFORM_ENVIRONMENT >> -o plan -a         
