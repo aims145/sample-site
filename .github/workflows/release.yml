@@ -62,10 +62,7 @@ jobs:
   terraform-sandbox:
     name: "sandbox-Terraform"
     runs-on: ubuntu-latest
-    env:	
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
-      AWS_REGION: 'us-east-2'
+    environment: sandbox
 
     steps:
       - name: 'Checkout'
