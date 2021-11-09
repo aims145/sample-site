@@ -58,7 +58,6 @@ jobs:
           tf_actions_comment: true   
       - name: run shell script
         run: |
-          source $BASH_ENV
           chmod +x ./deploy.sh
           ./deploy.sh -e production -o plan -a          
           
