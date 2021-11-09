@@ -91,4 +91,4 @@ jobs:
       - name: run shell script
         run: |
           chmod +x ./deploy.sh
-          ./deploy.sh -e 'parameters.TERRAFORM_ENVIRONMENT' -o plan -a         
+          ./deploy.sh -e sandbox -o plan -a         
