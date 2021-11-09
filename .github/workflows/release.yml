@@ -47,6 +47,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
+          TERRAFORM_ENVIRONMENT: production
           tf_actions_working_dir: './environments/production'
           tf_actions_comment: true
       - name: 'Terraform plan'
@@ -81,6 +82,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
+          TERRAFORM_ENVIRONMENT: sandbox
           tf_actions_working_dir: './environments/sandbox'
           tf_actions_comment: true         
       - name: run shell script
