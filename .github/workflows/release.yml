@@ -30,10 +30,7 @@ jobs:
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: './modules/vpc'
           tf_actions_comment: true   
-      - name: run shell script
-        run: |
-          chmod +x ./deploy.sh
-          ./deploy.sh -e sandbox -o plan -a       
+       
   terraform-prod:
     name: "Terraform-prod"
     runs-on: ubuntu-latest
@@ -59,6 +56,12 @@ jobs:
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: './environments/production'
           tf_actions_comment: true   
+      - name: run shell script
+        run: |
+          source $BASH_ENV
+          chmod +x ./deploy.sh
+          ./deploy.sh -e production -o plan -a          
+          
   terraform-sandbox:
     name: "sandbox-Terraform"
     runs-on: ubuntu-latest
