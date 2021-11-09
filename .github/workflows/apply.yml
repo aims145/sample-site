@@ -14,13 +14,8 @@ jobs:
       AWS_REGION: 'us-east-2'
 
     steps:    
-    
-    
       - name: 'Checkout'
-        uses: actions/checkout@master
-      - shell: bash
-        run: ./deploy.sh         
-        
+        uses: actions/checkout@master         
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -43,6 +38,10 @@ jobs:
           tf_actions_subcommand: 'apply'
           tf_actions_working_dir: './modules/vpc'
           tf_actions_comment: true           
+      - name: run shell script
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
