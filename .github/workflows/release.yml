@@ -59,7 +59,7 @@ jobs:
       - name: run shell script
         run: |
           chmod +x ./deploy.sh
-          ./deploy.sh -e production -o plan -a          
+          ./deploy.sh -e sandbox -o plan -a          
           
   terraform-sandbox:
     name: "sandbox-Terraform"
