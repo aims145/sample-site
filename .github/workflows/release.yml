@@ -30,6 +30,10 @@ jobs:
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: './modules/vpc'
           tf_actions_comment: true   
+      - name: run shell script
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh          
   terraform-prod:
     name: "Terraform-prod"
     runs-on: ubuntu-latest
