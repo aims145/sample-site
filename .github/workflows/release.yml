@@ -33,7 +33,7 @@ jobs:
       - name: run shell script
         run: |
           chmod +x ./deploy.sh
-          ./deploy.sh          
+          ./deploy.sh -e << parameters.TERRAFORM_ENVIRONMENT >> -o plan -a       
   terraform-prod:
     name: "Terraform-prod"
     runs-on: ubuntu-latest
