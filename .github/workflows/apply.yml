@@ -5,54 +5,52 @@ on:
     types: [ closed ]
 
 jobs:
-  terraform-management:
-    name: "Terraform-modules"
-    runs-on: ubuntu-latest
-    env:	
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
-      AWS_REGION: 'us-east-2'
+  # terraform-module:
+  #   name: "Terraform-modules"
+  #   runs-on: ubuntu-latest
+  #   env:	
+  #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+  #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
+  #     AWS_REGION: 'ap-east-1'
 
-    steps:    
-      - name: 'Checkout'
-        uses: actions/checkout@master         
-      - name: 'Terraform Init'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: './modules/vpc'
-          tf_actions_comment: true
-      - name: 'Terraform plan'
-        uses: hashicorp/terraform-github-actions@master        
-        
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'plan'
-          tf_actions_working_dir: './modules/vpc'
-          tf_actions_comment: true  
-      - name: 'Terraform apply'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: './modules/vpc'
-          tf_actions_comment: true           
-      - name: run shell script
-        run: |
-          chmod +x ./deploy.sh
-          ./deploy.sh
+  #   steps:
+  #     - name: 'Checkout'
+  #       uses: actions/checkout@master
+  #     - name: 'Terraform Init'
+  #       uses: hashicorp/terraform-github-actions@master
+  #       with:
+  #         tf_actions_version: 0.12.13
+  #         tf_actions_subcommand: 'init'
+  #         tf_actions_working_dir: './modules/vpc'
+  #         tf_actions_comment: true
+  #     - name: 'Terraform plan'
+  #       uses: hashicorp/terraform-github-actions@master
+  #       with:
+  #         tf_actions_version: 0.12.13
+  #         tf_actions_subcommand: 'plan'
+  #         tf_actions_working_dir: './modules/vpc'
+  #         tf_actions_comment: true  
+  #     - name: 'Terraform apply'
+  #       uses: hashicorp/terraform-github-actions@master
+  #       with:
+  #         tf_actions_version: 0.12.13
+  #         tf_actions_subcommand: 'apply'
+  #         tf_actions_working_dir: './modules/vpc'
+  #         tf_actions_comment: true           
   terraform:
     name: "Terraform"
+    needs: terraform-sandbox
     runs-on: ubuntu-latest
     env:	
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
-      AWS_REGION: 'us-east-2'
+      AWS_REGION: 'eu-central-1'
 
     steps:
       - name: 'Checkout'
         uses: actions/checkout@master
+      - name: set-env
+        run: echo "tf_actions_working_dir=$(echo $tf_actions_working_dir | cut -c 1-6)" >> $GITHUB_ENV        
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -60,8 +58,11 @@ jobs:
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: './environments/production'
           tf_actions_comment: true
+
       - name: 'Terraform plan'
         uses: hashicorp/terraform-github-actions@master
+      - name: set env
+        run: ./bin/deploy.sh -e $tf_actions_working_dir -o plan  
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
@@ -76,11 +77,12 @@ jobs:
           tf_actions_comment: true            
   terraform-sandbox:
     name: "sandbox-Terraform"
+
     runs-on: ubuntu-latest
     env:	
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
-      AWS_REGION: 'us-east-2'
+      AWS_REGION: 'ap-south-1'
 
     steps:
       - name: 'Checkout'

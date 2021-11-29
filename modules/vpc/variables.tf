@@ -3,7 +3,7 @@ variable "env" {
 }
 
 variable "region" {
-  default = "us-west-2"
+  default = "ap-east-1"
 }
 
 variable "zones" {
